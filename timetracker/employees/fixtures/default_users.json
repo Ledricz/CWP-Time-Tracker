@@ -1,0 +1,42 @@
+[
+    {
+        "model": "employees.employees",
+        "pk": 1,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "johndoe@example.com",
+            "password": "pbkdf2_sha256$600000$jiBSs19VAZO0Nk8ZVoanlm$3vhdC3okN3DiC9R3Fk9QIJrOZVFAizxG1gOk3UDHifQ="
+        }
+    },
+    {
+        "model": "employees.employees",
+        "pk": 2,
+        "fields": {
+            "first_name": "Jane",
+            "last_name": "Smith",
+            "email": "janesmith@example.com",
+            "password": "pbkdf2_sha256$600000$jiBSs19VAZO0Nk8ZVoanlm$3vhdC3okN3DiC9R3Fk9QIJrOZVFAizxG1gOk3UDHifQ="
+        }
+    },
+    {
+        "model": "employees.employees",
+        "pk": 3,
+        "fields": {
+            "first_name": "Joe",
+            "last_name": "Wesley",
+            "email": "joewesley@example.com",
+            "password": "pbkdf2_sha256$600000$jiBSs19VAZO0Nk8ZVoanlm$3vhdC3okN3DiC9R3Fk9QIJrOZVFAizxG1gOk3UDHifQ="
+        }
+    },
+    {
+        "model": "employees.employees",
+        "pk": 4,
+        "fields": {
+            "first_name": "Juan",
+            "last_name": "Cruz",
+            "email": "juancruz@example.com",
+            "password": "pbkdf2_sha256$600000$jiBSs19VAZO0Nk8ZVoanlm$3vhdC3okN3DiC9R3Fk9QIJrOZVFAizxG1gOk3UDHifQ="
+        }
+    }
+]

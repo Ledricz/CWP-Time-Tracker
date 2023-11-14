@@ -1,0 +1,8 @@
+<form class="tt-form" action="/api/v1/employees/{{ employee.id }}/" data-redirect="/employees/" data-method="PATCH">
+    {% csrf_token  %}
+    <input class="d-none" type="text" name="active" value="false">
+    <a class="btn btn-primary submit" role="button" type="submit" href="#">
+        Delete Employee
+    </a>
+    <p class="error-container text-danger mb-0 fw-bold">&nbsp;</p>
+</form>

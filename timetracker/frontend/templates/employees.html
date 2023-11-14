@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Time Tracker | Employees {% endblock title %}
+{% block content %}
+<div id="wrap" class="container pt-5">
+    <div class="row">
+        <table class="table table-striped text-center">
+            <tr>
+                <th class="align-middle">First Name</th>
+                <th class="align-middle">Last Name</th>
+                <th class="align-middle">Email</th>
+                <th class="align-middle">&nbsp;</th>
+            </tr>
+            {% for employee in employees %}
+            <tr>
+                <td class="align-middle">{{ employee.first_name }}</td>
+                <td class="align-middle">{{ employee.last_name }}</td>
+                <td class="align-middle">{{ employee.email }}</td>
+                <td class="align-middle">
+                    <button class="btn btn-warning me-3" data-bs-toggle="modal" data-bs-target="#update-pwd-{{ employee.id }}">Edit</button>
+                    <div id="update-pwd-{{ employee.id }}" class="modal modal-dialog-centered modal-dialog-scrollable modal-xl" style="display: none;" tabindex="-1">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+                                        Edit Employee 
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="bg-white pb-5">
+                                        {% include "forms/update-user-form.html" with employee=employee form_redirect="/employees/" %}                                        
+                                    </div>
+                                </div>
+                                <div class="d-none modal-footer">
+                                    <a class="" role="" type="" href=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#delete-{{ employee.id }}">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <div id="delete-{{ employee.id }}" class="modal modal-dialog-centered modal-dialog-scrollable" style="display: none;" tabindex="-1">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+                                        This action is irreversible
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="bg-white pb-5">
+                                        <p class="text-start">Are you sure you want delete the "{{ employee.name }}"?</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    {% include "forms/delete-user-form.html" with employee=employee %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#signin-modal">
+                <i class="fa fa-plus"></i>
+                Add new Employee
+            </button>
+        </div>
+        <div id="signin-modal" class="modal modal-dialog-centered modal-dialog-scrollable modal-xl" style="display: none;" tabindex="-1">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add new Employee</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="bg-white pb-5">
+                            {% include "forms/signin-form.html" with form_action="/api/v1/employees/" form_redirect="/employees/" %}
+                        </div>
+                    </div>
+                    <div class="d-none modal-footer">
+                        <a class="" role="" type="" href=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

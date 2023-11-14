@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Time Tracker | Projects {% endblock title %}
+{% block content %}
+<div id="wrap" class="container pt-5">    
+    {% csrf_token %}
+    <div class="row">
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td class="align-middle">
+                        <div class="curtain">
+                            <div class="toggle-slide text-start ms-3 my-2" data-target="#collapse-{{ project.id }}">
+                                <h3>{{ project.name }}</h3>
+                                <p class="mb-0">Total Time: <span class="fw-bold">{{ project.totals }}</span></p>
+                            </div>
+                            <div id="collapse-{{ project.id }}" style="display:none;">
+                                {% for user in project.users %}
+                                <div class="row mt-2">
+                                    <div class="offset-md-1 col-2 text-start">
+                                        <p>{{ user.name }}</p>
+                                    </div>
+                                    <div class="col-2 text-start">
+                                        <p>{{ user.total_time }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="align-middle">
+                        <div class="d-flex justify-content-end px-3 my-3">                            
+                            <button class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#delete-{{ project.id }}">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                            <div id="delete-{{ project.id }}" class="modal modal-dialog-centered modal-dialog-scrollable" style="display: none;" tabindex="-1">
+                                <div class="modal-dialog ">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">
+                                                <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+                                                This action is irreversible
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="bg-white pb-5">
+                                                <p class="text-start">Are you sure you want delete the project: "{{ project.name }}"?</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {% include "forms/delete-proj-form.html" with project=project %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <button id="add-new-project" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                Add new Project
+            </button>
+            <button id="save-new-projects" class="btn btn-success" style="display: none;">
+                <i class="fa fa-save" ></i>
+                <i class="fa fa-spinner fa-spin" style="display: none;"></i>
+            </button>
+            <p class="error-container text-danger mb-0 fw-bold">&nbsp;</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'js/projects.js' %}"></script>
+{% endblock scripts %}

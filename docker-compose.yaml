@@ -1,0 +1,8 @@
+services:
+  project:
+    build: ./timetracker        
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./timetracker:/timetracker
+    command: bash manage-django.sh

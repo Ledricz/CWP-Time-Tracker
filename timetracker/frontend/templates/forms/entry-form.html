@@ -1,0 +1,90 @@
+<form class="tt-form" action="/api/v1/entries/{{ entry.id }}{% if entry %}/{% endif %}" data-redirect="/timesheets/{{ user.id }}/week/{{ week_num }}/" data-method="{{ form_method }}">
+    {% csrf_token  %}
+    <div class="row px-0 px-md-5">
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <p class="text-end">Project</p>
+                </div>
+                <div class="col-10">
+                    <div class="">
+                        <select class="form-select text-start" name="project_id">
+                            {% for proj in projects %}
+                            <option value="{{ proj.id }}" {% if proj.id == project.id %}selected=""{% endif %}>
+                                {{ proj.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <p class="text-end">User</p>
+                </div>
+                <div class="col-10">
+                    <div class="">
+                        <p class="text-start">{{ entry.user_name|default:user }}</p>
+                    </div>
+                    <div class="d-none">
+                        <input name="user_id" type="text" value="{{ entry.user_id|default:user.id }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <p class="text-end">Date</p>
+                </div>
+                <div class="col-10">
+                    <div class="">
+                        <input name="date" class="form-control" type="date" value="{% if entry %}{{ entry.date|date:'Y-m-d' }}{% else %}{% now 'Y-m-d' %}{% endif %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <p class="text-end">Duration</p>                    
+                </div>
+                <div class="col-10">
+                    <div class="input-group">
+                        <input class="form-control text-end" name="hours" type="text" value="{{ entry.hours }}" placeholder="HH">
+                        <span class="input-group-text">:</span>
+                        <input class="form-control" name="minutes" type="text" value="{{ entry.minutes }}" placeholder="MM">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <p class="text-end">Description</p>                    
+                </div>
+                <div class="col-10">
+                    <div class="">
+                        <textarea class="form-control" name="description" type="text">{{ entry.description }}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-10 offset-md-2">
+                    <div class="text-start mb-0 mt-3">
+                        <p>                    
+                            <a class="btn btn-success px-5" type="submit" href="#" role="button">
+                                Save
+                            </a>
+                        </p>
+                        <p class="error-container text-danger mb-0 fw-bold">&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Time Tracker | Timesheets {% endblock title %}
+{% block content %}
+<div id="wrap" class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h2>{{ user }}</h2>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex flex-row justify-content-md-end mb-3 mb-md-0">
+                        <div class="my-auto">
+                            <a class="btn btn-outline-info" href="/timesheets/{{ user.id }}/week/{{ week_num|add:-1 }}">
+                                <i class="fa fa-circle-chevron-left text-info"></i>
+                            </a>
+                        </div>
+                        <div class="mx-3 py-2">
+                            <p class="border border-1 border-dark bg-white rounded mb-0 px-3 py-2">
+                                {{ week.0|date:"M" }} {{ week.0|date:"d" }} - {{ week.6|date:"M" }} {{ week.6|date:"d" }}
+                            </p>
+                        </div>
+                        <div class="my-auto">
+                            <a class="btn btn-outline-info" href="/timesheets/{{ user.id }}/week/{{ week_num|add:1 }}/">
+                                <i class="fa fa-circle-chevron-right text-info"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table table-striped-columns">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="d-none d-md-table-cell align-middle text-center">
+                            <p class="mb-0 d-none d-md-flex">Project</p>
+                        </th>
+                        {% for day in week %}
+                        <th data-date="{{ day|date:'Y-m-d' }}">
+                            <p class="text-secondary">{{ day|date:"D" }}</p>
+                            <p class="my-3 text-center">{{ day|date:"M" }} {{ day|date:"d" }}</p>
+                        </th>
+                        {% endfor %}
+                        <th>
+                            <p class="my-3 text-center">Total</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                    <tr>
+                        <td colspan="4" class="d-none d-md-table-cell align-middle">
+                            <p class="mb-0" data-project-list="{{ project.id }}">{{ project.name }}</p>
+                        </td>
+                        {% for entry in project.entries %}
+                        <td class="align-middle">
+                            <div class="entry-container mx-auto my-3 text-center" data-project_id="{{ project.id }}" style="max-width: 100px;">
+                                <a class="text-decoration-none border-dark justify-content-center px-1 py-2" href="#" style="font-size: 0.9rem;" 
+                                data-bs-toggle="modal" data-bs-target="#{% if entry %}update-entry-{{ entry.id }}{% else %}create-entry{% endif %}">
+                                    {{ entry.duration|default:"HH:MM" }}
+                                </a>
+                                {% if entry %}
+                                <div id="update-entry-{{ entry.id }}" class="modal modal-dialog-centered modal-xl modal-dialog-scrollable" style="display: none;" tabindex="-1">
+                                    <div class="modal-dialog ">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">
+                                                    Edit Time Entry
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {% include "forms/entry-form.html" with week_num=week_num entry=entry project=project projects=projects user=user form_method="PATCH" %}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>  
+                        </td>   
+                        {% endfor %}
+                        <td class="align-middle">
+                            <p class="mb-0 text-center text-info">
+                                {{ project.totals }}
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="4" class="d-none d-md-table-cell"><p class="">Total</p></td>
+                        {% for day_total in totals_by_date %}                        
+                        <td class="align-middle">
+                            <p class="mb-0 text-center text-info">
+                                {{ day_total }}
+                            </p>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <button id="add-new-entry" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-entry">
+                <i class="fa fa-plus"></i>
+                Add new entry
+            </button>
+        </div>        
+        <div id="create-entry" class="modal modal-dialog-centered modal-xl modal-dialog-scrollable" style="display: none;" tabindex="-1">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Create Time Entry
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% include "forms/entry-form.html" with projects=all_projects week_num=week_num form_method="POST" %}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'js/timesheets.js' %}"></script>
+{% endblock scripts %}

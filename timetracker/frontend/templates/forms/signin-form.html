@@ -1,0 +1,45 @@
+<form class="tt-form" action="{{ form_action }}" data-redirect="{{ form_redirect }}">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-column ps-5 pe-5 pe-md-2 mb-3">
+                <div class="form-floating">
+                    <input class="form-control" name="first_name" type="text">
+                    <label class="form-label" for="first_name">First Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-column ps-5 pe-5 ps-md-2 mb-3">
+                <div class="form-floating">
+                    <input class="form-control" name="last_name" type="text">
+                    <label class="form-label" for="last_name">Last Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-column ps-5 pe-5 pe-md-2 mb-3">
+                <div class="form-floating">
+                    <input class="form-control" name="email" type="text">
+                    <label class="form-label" for="email">Email</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-column ps-5 pe-5 ps-md-2 mb-3">
+                <div class="form-floating">
+                    <input class="form-control" name="password" type="password">
+                    <label class="form-label" for="password">Pin</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex flex-column mt-0 mt-md-3 px-5">
+                <a class="btn btn-primary px-5 w-100" type="submit" href="#" role="button">
+                    Register
+                </a>
+                <p class="error-container text-danger mb-0 fw-bold">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</form>

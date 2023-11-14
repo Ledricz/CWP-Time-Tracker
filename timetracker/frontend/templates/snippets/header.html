@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <h1>
+            <a href="/home" class="navbar-brand">
+                <strong>Time Tracker</strong>
+            </a>
+        </h1>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar" class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar nav flex-column flex-md-row">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="/timesheets/{{ user.id }}/" class="mx-1 text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        Timesheets
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/employees" class="mx-1 text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects" class="mx-1 text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        Projects
+                    </a>
+                </li>
+                <li class="nav-item">   
+                    <a href="#" class="logout btn btn-secondary mt-1 mx-1 d-none d-md-flex icon-link">
+                        Log Out 
+                        <i class="fa fa-sign-out my-auto ms-2" aria-hidden="true"></i>
+                    </a> 
+                    <a href="#" class="logout btn btn-secondary mt-1 mx-1 d-flex d-md-none link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        Log Out 
+                    </a>
+                </li>
+                {% else %}    
+                <li class="nav-item">
+                    <a href="/signin" class="btn btn-primary mt-1 me-3 icon-link d-none d-md-flex">
+                        Sign Up
+                    </a> 
+                    <a href="/signin" class="logout btn btn-secondary mt-1 mx-1 d-flex d-md-none link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        Sign Up 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="btn btn-primary mt-1 icon-link d-none d-md-flex">
+                        <i class="fa fa-sign-in my-auto me-2" aria-hidden="true"></i> 
+                        Log in
+                    </a> 
+                    <a href="/login" class="logout btn btn-secondary mt-1 mx-1 d-flex d-md-none link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        Log in 
+                    </a>
+                </li>
+                {% endif %}
+            </ul>     
+        </div>
+    </div>
+</nav>

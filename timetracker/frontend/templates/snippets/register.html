@@ -1,0 +1,23 @@
+<ul class="nav nav-tabs nav-fill">
+    <a id="sign-tab" class="nav-link {% if active_tab == 'sign_in' %}active{% endif %}" href="#" data-bs-toggle="tab" data-bs-target="#signin-tab-pane"
+        type="button" role="tab" aria-controls="signin-tab-pane" aria-selected="true">
+        Register
+    </a>
+    <a id="login-tab" class="nav-link {% if active_tab == 'log_in' %}active{% endif %}" href="#" data-bs-toggle="tab" data-bs-target="#login-tab-pane" 
+        type="button" role="tab" aria-controls="login-tab-pane" aria-selected="false">
+        <i class="fa fa-sign-in" aria-hidden="true"></i>
+        Log In
+    </a>
+</ul>
+<div class="tab-content">
+    <div id="signin-tab-pane" class="tab-pane fade {% if active_tab == 'sign_in' %}show active{% endif %}" role="tabpanel" aria-labelledby="signin-tab-pane" tabindex="0">
+        <div class="bg-white py-5 border-bottom border-start border-end">
+            {% include "forms/signin-form.html" with form_action="/api/v1/employees/signup_login/" form_redirect="/home/" %}
+        </div>
+    </div>
+    <div id="login-tab-pane" class="tab-pane fade {% if active_tab == 'log_in' %}show active{% endif %}" role="tabpanel" aria-labelledby="login-tab-pane" tabindex="0">
+        <div class="bg-white py-5">
+            {% include "forms/login-form.html"%}
+        </div>
+    </div>
+</div>

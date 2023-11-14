@@ -1,0 +1,20 @@
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+#wrap {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+.btn.btn-outline-info .text-info:hover{
+    color: white !important
+}
+
+.accordion-item, .accordion-button {
+    background-color: transparent !important;
+}

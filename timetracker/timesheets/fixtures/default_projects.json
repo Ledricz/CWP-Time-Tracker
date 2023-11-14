@@ -1,0 +1,26 @@
+[
+    {
+        "model": "timesheets.projects",
+        "pk": 1,
+        "fields": {
+            "name": "Internal ERP",
+            "active": true
+        }
+    },
+    {
+        "model": "timesheets.projects",
+        "pk": 2,
+        "fields": {
+            "name": "Client 1 - Django",
+            "active": true
+        }
+    },
+    {
+        "model": "timesheets.projects",
+        "pk": 3,
+        "fields": {
+            "name": "Client 2 - Django",
+            "active": true
+        }
+    }
+]

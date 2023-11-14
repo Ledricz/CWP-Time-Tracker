@@ -1,0 +1,79 @@
+[
+    {
+        "model": "timesheets.entries",
+        "pk": 1,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 1, 
+            "hours": "8",
+            "description": "test",
+            "date": "2023-11-13"
+        }
+    },
+    {
+        "model": "timesheets.entries",
+        "pk": 2,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 1, 
+            "hours": "4",
+            "description": "test",
+            "date": "2023-11-14"
+        }
+    },
+    {
+        "model": "timesheets.entries",
+        "pk": 3,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 1, 
+            "hours": "4",
+            "description": "test",
+            "date": "2023-11-15"
+        }
+    },
+    {
+        "model": "timesheets.entries",
+        "pk": 4,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 2, 
+            "hours": "4",
+            "description": "test",
+            "date": "2023-11-14"
+        }
+    },
+    {
+        "model": "timesheets.entries",
+        "pk": 5,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 2, 
+            "hours": "4",
+            "description": "test",
+            "date": "2023-11-15"
+        }
+    },
+    {
+        "model": "timesheets.entries",
+        "pk": 6,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 2, 
+            "hours": "8",
+            "description": "test",
+            "date": "2023-11-16"
+        }
+    },
+    {
+        "model": "timesheets.entries",
+        "pk": 7,
+        "fields": {
+            "user_id": 1, 
+            "project_id": 3, 
+            "hours": "8",
+            "description": "test",
+            "date": "2023-11-17"
+        }
+    }
+]
